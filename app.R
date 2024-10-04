@@ -102,7 +102,8 @@ ui <- #navbarPage(
            h1("TITLE OF THE PAPER"),
            h5("Anirudra Parajuli, Annika Bendes, Fabian Byvald, Virginia M. Stone, Emma E. Ringqvist, Marta Butrym, Emmanouil Angelis, Sophie Kipper, Stefan Bauer, Niclas Roxhed, Jochen M. Schwenk, Malin Flodström-Tullberg"),
            h2("About"),
-           HTML("<p> This app provides complementary visualizations and aims to help exploring Olink data generated from dried blood spot (DBS) samples samples from mice. The app includes visualizations of the longitudinal protein profiles for each protein, protein-protein correlations, and of data quality controls.
+           HTML("<p>Frequent self-sampling of dried blood spots (DBS) on volumetric devices could aid the detection of early, disease-predictive protein biomarkers. To test this, 5 µl blood samples were collected from a mouse model up to daily for 14 days post-infection with a type 1 diabetes-associated virus, coxsackievirus B3. DBS samples were analyzed for 90 proteins, which demonstrated transient proteome changes in virus-infected animals. This application has been designed to provide an interactive platform for browsing and exploring the proteomic data sets generated in this study.
+           <p> This app provides complementary visualizations and aims to help exploring Olink data generated from dried blood spot (DBS) samples samples from mice. The app includes visualizations of the longitudinal protein profiles for each protein, protein-protein correlations, and of data quality controls.
               <br>
               <b> Data </b> used for the study can be found at LINK with the DOI DOI number, and <b> code </b> used is found at the Schwenk Lab and XX Github accounts.
               <br><br>
