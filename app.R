@@ -14,7 +14,7 @@ library(tidyr)
 library(plotly)
 library(heatmaply)
 library(tibble)
-library(utils)
+#library(utils)
 library(stringr)
 #load("shiny_mouse_loaded_data.RData")
 #---------------------------                        Loading and prepping data                                           ----------------
@@ -99,17 +99,17 @@ ui <- #navbarPage(
             value = "about",
            verbatimTextOutput("about"),
            h4("Companion app to"), 
-           h1("TITLE OF THE PAPER"),
+           h1("Longitudinal blood microsampling and proteome monitoring facilitate timely intervention in experimental type 1 diabetes"),
            h5("Anirudra Parajuli, Annika Bendes, Fabian Byvald, Virginia M. Stone, Emma E. Ringqvist, Marta Butrym, Emmanouil Angelis, Sophie Kipper, Stefan Bauer, Niclas Roxhed, Jochen M. Schwenk, Malin Flodström-Tullberg"),
            h2("About"),
-           HTML("<p>Frequent self-sampling of dried blood spots (DBS) on volumetric devices could aid the detection of early, disease-predictive protein biomarkers. To test this, 5 µl blood samples were collected from a mouse model up to daily for 14 days post-infection with a type 1 diabetes-associated virus, coxsackievirus B3. DBS samples were analyzed for 90 proteins, which demonstrated transient proteome changes in virus-infected animals. This application has been designed to provide an interactive platform for browsing and exploring the proteomic data sets generated in this study.
-           <p> This app provides complementary visualizations and aims to help exploring Olink data generated from dried blood spot (DBS) samples samples from mice. The app includes visualizations of the longitudinal protein profiles for each protein, protein-protein correlations, and of data quality controls.
+           HTML("<p>Frequent self-sampling of dried blood spots (DBS) on volumetric devices could aid the detection of early, disease-predictive protein biomarkers. To test this, a mouse model was infected with a type 1 diabetes-associated virus, coxackievirus B3 and 5 µl blood samples were collected every 1-3 days for 14 days post-infection. DBS samples were analyzed for 90 proteins, and these revealed transient proteome changes in virus-infected animals. This application has been designed to provide an interactive platform for browsing and exploring the proteomic data sets generated in this study.
+           <p> This app provides complementary visualizations and aims to help with the exploration of Olink data generated from murine DBS samples. The app includes visualizations of the longitudinal protein profiles for each protein, the protein-protein correlations, and the data quality controls.
               <br>
               <b> Data </b> used for the study can be found at LINK with the DOI DOI number, and <b> code </b> used is found at the Schwenk Lab and XX Github accounts.
               <br><br>
 DBS samples were collected from CVB3- and mock-infected NOD mice onto Capitainer B (Ref#18-01-001) sampling cards.
 <br>
-Data was generated using Olink Target 96 Mouse Exploratory panel (Art# 95380)
+Data was generated using the Olink Target 96 Mouse Exploratory panel (Art# 95380)
 
 <br><br>
 <hr>
@@ -161,10 +161,10 @@ App version: 0.0.1
                         p("This page shows protein levels as combined (Z-score) or uncombined (ProtPQN) data over sampling time. 
                         The groups (infected/control) are shown in yellow and green. Loess regression was used to illustrate the trend per group with a 95% confidence interval
                         around the smoothed lines.", tags$br(),tags$br(),
-                          "Percentage of samples above and below LOD for the protein is shown in the barplots for each cohort (ProtPQN) or combined (Z-score).",
+                          "Percentage of samples above and below the LOD for the protein are shown in the barplots for each cohort (ProtPQN) or combined (Z-score).",
                           tags$br(), tags$br(),   
-                          "Different proteins and data set can be selected in the seleciton windows above.", tags$br(),
-                        "Uniprot ID for the protein are shown in green the box.", tags$br(),tags$br()
+                          "Different proteins and data set can be selected in the selection windows above.", tags$br(),
+                        "Uniprot ID for the proteins are shown in green the box.", tags$br(),tags$br()
 
                         )
                     )
@@ -290,8 +290,8 @@ tabPanel("Protein-protein correlation",
          
          # Additional information section (initially hidden)
          div(id = "more_info_corr", style = "display:none;",  # Initially hide the info section
-             p("Different data sets and studies can be selected in the seleciton windows above.", tags$br(),tags$br(),
-               "This page shows the protein-protein correlations calculated using Spearman in a heatmap. Red indicates high correlation and blue indicates inverse correlation."
+             p("Different data sets and studies can be selected in the selection windows above.", tags$br(),tags$br(),
+               "This page shows the protein-protein correlations calculated using Spearman's correlation in a heatmap. Red indicates a high correlation and blue indicates an inverse correlation."
              )
          )
          
@@ -364,9 +364,9 @@ tabPanel("Protein QC",
                  
                  # Additional information section (initially hidden)
                  div(id = "more_info_qc", style = "display:none;",  # Initially hide the info section
-                     p("Different proteins, study sets, and data set (ProtPQN or Z-score) can be selected in the seleciton windows above.", tags$br(),tags$br(),
-                       "This page shows precision and variance for each protein target and the different data sets.", tags$br(),tags$br(),
-                       "Precision is determined by CV calculations for replicated samples using the ProtPQN data. The average CV for the replicated samples can be found in the table overview", 
+                     p("Different proteins, study sets, and data sets (ProtPQN or Z-score) can be selected in the selection windows above.", tags$br(),tags$br(),
+                       "This page shows precision and variance for each protein target and for the different data sets.", tags$br(),tags$br(),
+                       "Precision is determined by CV calculations for replicate samples using the ProtPQN data. The average CV for the replicate samples can be found in the table overview", 
                        tags$br(), tags$br(),
                        "The interquartile range (IQR) is shown in the overview table, and the IQR for the selected target in relation to the other proteins is shown in green in the scatter plot.",
                        tags$br(), tags$br()
