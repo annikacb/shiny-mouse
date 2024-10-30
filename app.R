@@ -911,7 +911,7 @@ server <- function(input, output) {
       ylab("Z-score") +
       theme_classic(15) +
       scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
-      geom_smooth(method = "loess", aes(fill=Infection_status, col = Infection_status) ) +
+      geom_smooth(method = "loess", aes(fill=Infection_status, col = Infection_status), formula = 'y ~ x'  ) +
       scale_fill_manual( values = c( "infected" = "#FFBF69", "control" = "#639c93")) +
       scale_color_manual(values =  c( "infected" = "#FFBF69", "control" = "#639c93")) +
       guides(fill = "none")
