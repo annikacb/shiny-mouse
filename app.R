@@ -521,20 +521,7 @@ server <- function(input, output) {
       abspqn_long <- b2_abspqn_long
       sample_info <- batch2_sample_info
      } 
-    # }  else if ( input$datatype_view_select_qc == "Z-score" ){
-    #    if (input$combine_data_qc) {
-    #      abspqn_long <- bind_rows(b1_zscore_long, b2_zscore_long)
-    #      sample_info <- sample_info_both
-    #    } else { # end if
-    #      if (input$batch_view_select_hm == "Study 1") {
-    #        abspqn_long <- b1_zscore_long
-    #        sample_info <- batch1_sample_info
-    #      } else{
-    #        abspqn_long <- b2_zscore_long
-    #        sample_info <- batch2_sample_info
-    #      }
-    #    }
-    # } # end else if
+
     
     selected_protein <- input$prot_view_select_qc
     
@@ -652,34 +639,7 @@ server <- function(input, output) {
   output$trend_lod_plot_b2 <- renderPlot({
       selected_protein <- input$prot_view_select
       sample_info <- batch2_sample_info
-      #df <- olink_t96_p2
-
-      # # Select the specified column
-      # col_data <- df[[input$prot_view_select]]
-      # 
-      # # Take out the LOD value:
-      # reference_value <- col_data[93]
-      # 
-      # # Compare the values in rows 5:92 (samples) to the value in row 93
-      # comparison <- ifelse(col_data[5:92] > reference_value, "Above", "Below")
-      # 
-      # # Calculate percentages
-      # percentages <- data.frame(
-      #   Category = c("Above", "Below"),
-      #   Percentage = c(sum(comparison == "Above") / length(comparison) * 100,
-      #                  sum(comparison == "Below") / length(comparison) * 100)
-      # )
-      # 
-      # # Generate bar plot
-      # plot1 <- ggplot(percentages, aes(x = Category, y = Percentage, fill = Category)) +
-      #   geom_bar(stat = "identity") +
-      #   theme_minimal() +
-      #   labs(title = paste("Samples above and below LOD", input$prot_view_select),
-      #        x = "Category",
-      #        y = "Percentage") +
-      #   ylim(0, 100) +
-      #   scale_fill_manual(values = c("#639c93", "#FFBF69"), labels = c("> LOD", "< LOD")) +
-      #   theme_bw(14)
+ 
       
       b2_abspqn_long_temp <-  b2_abspqn_long |>
         filter(!grepl("23MFT8:3_D14|_A|_B", sampleID))
@@ -726,44 +686,7 @@ server <- function(input, output) {
     patchwork::wrap_plots(plot1)
   })
   
-  
-  # output$trend_lod_plot_b1 <- renderPlot({
-  #   selected_protein <- input$prot_view_select
-  #   sample_info <- batch1_sample_info
-  #   selected_protein <- input$prot_view_select
-  #   df <- olink_t96_p1
-  #   
-  #   # Select the specified column
-  #   col_data <- df[[input$prot_view_select]]
-  #   
-  #   # Take out the LOD value:
-  #   reference_value <- col_data[93]
-  #   
-  #   # Compare the values in rows 5:92 (samples) to the value in row 93
-  #   comparison <- ifelse(col_data[5:92] > reference_value, "Above", "Below")
-  #   
-  #   # Calculate percentages
-  #   percentages <- data.frame(
-  #     Category = c("Above", "Below"),
-  #     Percentage = c(sum(comparison == "Above") / length(comparison) * 100,
-  #                    sum(comparison == "Below") / length(comparison) * 100)
-  #   )
-  #   
-  #   # Generate bar plot
-  #   plot1 <- ggplot(percentages, aes(x = Category, y = Percentage, fill = Category)) +
-  #     geom_bar(stat = "identity") +
-  #     theme_minimal() +
-  #     labs(title = paste("Samples above and below LOD", input$prot_view_select),
-  #          x = "Category",
-  #          y = "Percentage") +
-  #     ylim(0, 100) +
-  #     scale_fill_manual(values = c("#639c93", "#FFBF69"), labels = c("> LOD", "< LOD")) +
-  #     theme_bw(14)
-  #   
-  #   plot2 <- long_plot_fun(b1_abspqn_long, batch1_sample_info, selected_protein)
-  #   
-  #   patchwork::wrap_plots(plot1 + plot2)
-  # })
+
   
   
   output$trend_lod_plot_b1 <- renderPlot({
@@ -918,47 +841,7 @@ server <- function(input, output) {
     
   })
   
-  
- 
-  
-  # output$trend_plot <- renderPlot({
-  # 
-  #   # User selection:
-  #   abspqn_long <- if (input$batch_view_select == "Batch 1") {
-  #     b1_abspqn_long
-  #   } else {
-  #     b2_abspqn_long
-  #   }
-  # 
-  #   sample_info <- if (input$batch_view_select == "Batch 1") {
-  #     batch1_sample_info
-  #   } else {
-  #     batch2_sample_info
-  #   }
-  # 
-  #   selected_protein <- input$prot_view_select
-  # 
-  #   abspqn_long |>
-  #     filter( assay == selected_protein) |>
-  #     left_join(sample_info, by = c("sampleID" = "Sample_name"), relationship = "many-to-many") |>
-  #     #filter(!study_subject %in% "Sample pool") |>
-  #     mutate(Infection_status = tolower(Infection_status)) |>
-  #     #filter(!str_detect(sample_number_original, "^21")) |>
-  #     ggplot( aes( x = as.numeric(sample_day), y = npx, group = Infection_status, col = Infection_status )) +
-  #     geom_point(aes(fill=Infection_status), alpha = 0.9, size = 3) +
-  #     labs(title = paste0(selected_protein)) + #,
-  #     #subtitle = paste0( "Color per treatment group")) +
-  #     #scale_color_brewer(palette="Dark2") +
-  #     xlab("Sample day") +
-  #     ylab("ProtPQN NPX") +
-  #     theme_classic(15) +
-  #     geom_smooth(method = "loess", aes(fill=Infection_status, col = Infection_status) ) +
-  #     scale_fill_manual( values = c( "infected" = "#FFBF69", "not infected" = "#639c93")) +
-  #     scale_color_manual(values =  c( "infected" = "#FFBF69", "not infected" = "#639c93")) +
-  #     guides(fill = "none")
-  # })
-  
-  
+
   
   
   ##----------                    Protein-protein correlation heatmap:                            ------
@@ -1028,167 +911,3 @@ server <- function(input, output) {
 # Run the application 
 shinyApp(ui = ui, server = server)
 
-
-# Not used stuff: 
-# output$trend_plot <- renderPlot({
-#   
-#   # User selection:
-#   abspqn_long <- if (input$batch_view_select == "Batch 1") {
-#     b1_abspqn_long
-#   } else {
-#     b2_abspqn_long
-#   }
-#   
-#   sample_info <- if (input$batch_view_select == "Batch 1") {
-#     batch1_sample_info
-#   } else {
-#     batch2_sample_info
-#   }
-#   
-#   selected_protein <- input$prot_view_select
-#   
-#   abspqn_long |>
-#     filter( assay == selected_protein) |>
-#     left_join(sample_info, by = c("sampleID" = "Sample_name"), relationship = "many-to-many") |>
-#     #filter(!study_subject %in% "Sample pool") |>
-#     mutate(Infection_status = tolower(Infection_status)) |>
-#     #filter(!str_detect(sample_number_original, "^21")) |>
-#     ggplot( aes( x = as.numeric(sample_day), y = npx, group = Infection_status, col = Infection_status )) +
-#     geom_point(aes(fill=Infection_status), alpha = 0.9, size = 3) +
-#     labs(title = paste0(selected_protein)) + #,
-#     #subtitle = paste0( "Color per treatment group")) +
-#     #scale_color_brewer(palette="Dark2") +
-#     xlab("Sample day") + 
-#     ylab("AbsPQN NPX") +
-#     theme_classic(15) +
-#     geom_smooth(method = "loess", aes(fill=Infection_status, col = Infection_status) ) +
-#     scale_fill_manual( values = c( "infected" = "#FFBF69", "not infected" = "#639c93")) +
-#     scale_color_manual(values =  c( "infected" = "#FFBF69", "not infected" = "#639c93")) +
-#     guides(fill = "none")
-# })
-
-#--------- Number of samples below LOD plot:
-# output$plot_missingness <- renderPlot({
-#   # Select the appropriate data frame based on batch_view_select
-#   df <- if (input$batch_view_select == "Batch 1") {
-#     olink_t96_p1
-#   } else {
-#     olink_t96_p2
-#   }
-#   
-#   # Select the specified column
-#   col_data <- df[[input$prot_view_select]]
-#   
-#   # Take out the LOD value:
-#   reference_value <- col_data[93]
-#   
-#   # Compare the values in rows 5:92 (samples) to the value in row 93
-#   comparison <- ifelse(col_data[5:92] > reference_value, "Above", "Below")
-#   
-#   # Calculate percentages
-#   percentages <- data.frame(
-#     Category = c("Above", "Below"),
-#     Percentage = c(sum(comparison == "Above") / length(comparison) * 100,
-#                    sum(comparison == "Below") / length(comparison) * 100)
-#   )
-#   
-#   # Generate bar plot
-#   ggplot(percentages, aes(x = Category, y = Percentage, fill = Category)) +
-#     geom_bar(stat = "identity") +
-#     theme_minimal() +
-#     labs(title = paste("Samples above and below LOD", input$prot_view_select),
-#          x = "Category",
-#          y = "Percentage") +
-#     ylim(0, 100) + 
-#     scale_fill_manual(values = c("#639c93", "#FFBF69"), labels = c("> LOD", "< LOD")) +
-#     theme_bw(14)
-# })
-
-# output$trend_lod_plot_b1 <- renderPlot({
-#   
-#   sample_info <- batch1_sample_info
-#   selected_protein <- input$prot_view_select
-#   df <- olink_t96_p1
-#   
-#   # Select the specified column
-#   col_data <- df[[input$prot_view_select]]
-#   
-#   # Take out the LOD value:
-#   reference_value <- col_data[93]
-#   
-#   # Compare the values in rows 5:92 (samples) to the value in row 93
-#   comparison <- ifelse(col_data[5:92] > reference_value, "Above", "Below")
-#   
-#   # Calculate percentages
-#   percentages <- data.frame(
-#     Category = c("Above", "Below"),
-#     Percentage = c(sum(comparison == "Above") / length(comparison) * 100,
-#                    sum(comparison == "Below") / length(comparison) * 100)
-#   )
-#   
-#   # Generate bar plot
-#   plot1 <- ggplot(percentages, aes(x = Category, y = Percentage, fill = Category)) +
-#     geom_bar(stat = "identity") +
-#     theme_minimal() +
-#     labs(title = paste("Samples above and below LOD", input$prot_view_select),
-#          x = "Category",
-#          y = "Percentage") +
-#     ylim(0, 100) + 
-#     scale_fill_manual(values = c("#639c93", "#FFBF69"), labels = c("> LOD", "< LOD")) +
-#     theme_bw(14)
-#   
-#   # User selection for longitudinal plot:
-#   # abspqn_long <- if (input$datatype_view_select == "AbsPQN") {
-#   #   b1_abspqn_long
-#   # } else {
-#   #   b1_zscore_long
-#   # }
-#   
-#   # User selection:
-#   # if (input$datatype_view_select == "AbsPQN") {
-#   # abspqn_long <- b1_abspqn_long
-#   plot2 <- b1_abspqn_long |>
-#     filter( assay == selected_protein) |>
-#     left_join(sample_info, by = c("sampleID" = "Sample_name"), relationship = "many-to-many") |>
-#     #filter(!study_subject %in% "Sample pool") |>
-#     mutate(Infection_status = tolower(Infection_status)) |>
-#     #filter(!str_detect(sample_number_original, "^21")) |>
-#     ggplot( aes( x = as.numeric(sample_day), y = npx, group = Infection_status, col = Infection_status )) +
-#     geom_point(aes(fill=Infection_status), alpha = 0.9, size = 3) +
-#     labs(title = paste0(selected_protein)) + #,
-#     #subtitle = paste0( "Color per treatment group")) +
-#     #scale_color_brewer(palette="Dark2") +
-#     xlab("Sample day") + 
-#     ylab("AbsPQN NPX") +
-#     theme_classic(15) +
-#     geom_smooth(method = "loess", aes(fill=Infection_status, col = Infection_status) ) +
-#     scale_fill_manual( values = c( "infected" = "#FFBF69", "not infected" = "#639c93")) +
-#     scale_color_manual(values =  c( "infected" = "#FFBF69", "not infected" = "#639c93")) +
-#     guides(fill = "none")
-#   
-#   patchwork::wrap_plots(plot1 + plot2 )
-# })
-# 
-
-# output$cv_table <- renderDT({
-#   # Select the appropriate data frame based on batch_view_select
-#   abspqn_long <- if (input$batch_view_select == "Batch 1") {
-#     b1_abspqn_long
-#   } else {
-#     b2_abspqn_long
-#   }
-#   
-#   sample_info <- if (input$batch_view_select == "Batch 1") {
-#     batch1_sample_info
-#   } else {
-#     batch2_sample_info
-#   }
-#   
-#   selected_protein <- input$prot_view_select
-#   cv_table <- cv_table_fun( npx_data_table = abspqn_long, sample_info_table = sample_info, protein = selected_protein)
-#   cv_table <- cv_table |>
-#     mutate(CV = round(CV, digits = 2))
-#   
-#   datatable(cv_table, options = list(pageLength = 10))
-#   
-# })
