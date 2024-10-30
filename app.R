@@ -102,10 +102,10 @@ ui <- #navbarPage(
            h1("Longitudinal blood microsampling and proteome monitoring facilitate timely intervention in experimental type 1 diabetes"),
            h5("Anirudra Parajuli, Annika Bendes, Fabian Byvald, Virginia M. Stone, Emma E. Ringqvist, Marta Butrym, Emmanouil Angelis, Sophie Kipper, Stefan Bauer, Niclas Roxhed, Jochen M. Schwenk, Malin Flodström-Tullberg"),
            h2("About"),
-           HTML("<p>Frequent self-sampling of dried blood spots (DBS) on volumetric devices could aid the detection of early, disease-predictive protein biomarkers. To test this, a mouse model was infected with a type 1 diabetes-associated virus, coxackievirus B3 and 5 µl blood samples were collected every 1-3 days for 14 days post-infection. DBS samples were analyzed for 90 proteins, and these revealed transient proteome changes in virus-infected animals. This application has been designed to provide an interactive platform for browsing and exploring the proteomic data sets generated in this study.
+           HTML("<p>Frequent self-sampling of dried blood spots (DBS) on volumetric devices could aid the detection of early, disease-predictive protein biomarkers. To test this, a mouse model was infected with a type 1 diabetes-associated virus, coxackievirus B3 and 5 µl blood samples were collected every 1-3 days for 14 days post-infection. DBS samples were analyzed for 92 proteins, and these revealed transient proteome changes in virus-infected animals. This application has been designed to provide an interactive platform for browsing and exploring the proteomic data sets generated in this study.
            <p> This app provides complementary visualizations and aims to help with the exploration of Olink data generated from murine DBS samples. The app includes visualizations of the longitudinal protein profiles for each protein, the protein-protein correlations, and the data quality controls.
               <br>
-              <b> Data </b> used for the study can be found at LINK with the DOI DOI number, and <b> code </b> used is found at the Schwenk Lab and XX Github accounts.
+              The <b> data </b> used in this study will be made available upon publication, and <b> code </b> used is found at the Schwenk Lab Github account.
               <br><br>
 DBS samples were collected from CVB3- and mock-infected NOD mice onto Capitainer B (Ref#18-01-001) sampling cards.
 <br>
