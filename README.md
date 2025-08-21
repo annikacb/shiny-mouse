@@ -4,4 +4,9 @@ An R Shiny App for visualizing proteomics data from the manuscript  *Frequent lo
 <hr>
 
 
+
 The app is hosted by [SciLifeLab Serve](https://mouse-dbs-profiling.serve.scilifelab.se/app/mouse-dbs-profiling).
+
+
+
+Data is available at the [SciLifeLab data repository](https://doi.org/10.17044/scilifelab.27368322), where you can find more information about the data files.
